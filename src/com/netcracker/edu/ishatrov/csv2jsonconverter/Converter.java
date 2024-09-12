@@ -20,16 +20,10 @@ public class Converter {
 
         String dstName = getDstName(path);
 
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_16));
+        try (BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_16));
              PrintWriter writer = new PrintWriter(dstName, StandardCharsets.UTF_16)) {
-            String line;
-
-            do {
-                line = reader.readLine();
-                System.out.println(line);
-            } while (line != null);
-            
+            new JsonWriter(writer).writeFrom(reader);
         } catch (FileNotFoundException ex) {
             System.out.println("Failed to create destination file");
             System.out.println(ex.getMessage());
