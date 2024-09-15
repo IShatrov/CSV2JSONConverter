@@ -3,8 +3,10 @@ package com.netcracker.edu.ishatrov.csv2jsonconverter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.List;
 
+/**
+ * A class that converts CSV to JSON and writes to JSON.
+ */
 public class JsonWriter {
     private static final String START = "{";
     private static final String END = "}";
@@ -22,6 +24,12 @@ public class JsonWriter {
         this.writer = writer;
     }
 
+    /**
+     * Reads data from reader, converts this data to JSON and writes the data to writer.
+     * @param reader CSV file to read from.
+     * @throws IOException If an IO error occurs.
+     * @throws IllegalArgumentException If the CSV file is not valid.
+     */
     public void writeFrom(BufferedReader reader) throws IOException, IllegalArgumentException {
         currentLine = -1;
 
@@ -43,6 +51,12 @@ public class JsonWriter {
         writer.write(END);
     }
 
+    /**
+     * Converts a line to JSON format and writes it to the file.
+     * @param line Line to write.
+     * @throws IOException If an IO error occurs.
+     * @throws IllegalArgumentException If the CSV file is not valid.
+     */
     private void writeLine(String line) throws IOException, IllegalArgumentException {
         if (line.contains(COMMENT_INDICATOR_CSV)) {
             writeComment(line);
@@ -53,6 +67,12 @@ public class JsonWriter {
         }
     }
 
+    /**
+     * Writes a JSON comment.
+     * @param line Line to convert to JSON comment.
+     * @throws IOException If an IO error occurs.
+     * @throws IllegalArgumentException If the CSV file is not valid.
+     */
     private void writeComment(String line) throws IOException, IllegalArgumentException {
         int commentStartIndex = line.indexOf(COMMENT_INDICATOR_CSV);
 
@@ -63,6 +83,12 @@ public class JsonWriter {
         writer.write(COMMENT_INDICATOR_JSON + line.substring(commentStartIndex + 1) + "\n");
     }
 
+    /**
+     * Writes JSON data.
+     * @param line Line to convert to JSON data.
+     * @throws IOException If an IO error occurs.
+     * @throws IllegalArgumentException If the CSV file is not valid.
+     */
     private void writeData(String line) throws IOException, IllegalArgumentException {
         int separatorIndex = line.indexOf(SEPARATOR_CSV);
 
