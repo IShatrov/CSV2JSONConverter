@@ -60,10 +60,10 @@ public class JsonWriter {
     private void writeLine(String line) throws IOException, IllegalArgumentException {
         if (line.contains(COMMENT_INDICATOR_CSV)) {
             writeComment(line);
-        }
-
-        if (line.contains(SEPARATOR_CSV)) {
+        } else if (line.contains(SEPARATOR_CSV)) {
             writeData(line);
+        } else {
+            throw new IllegalArgumentException("Unresolved characters on line " + currentLine);
         }
     }
 

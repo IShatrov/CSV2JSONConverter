@@ -34,10 +34,18 @@ public class Converter {
         } catch (FileNotFoundException ex) {
             System.out.println("Failed to create destination file");
             System.out.println(ex.getMessage());
+            return;
         } catch (IOException ex) {
             System.out.println("IO error");
             System.out.println(ex.getMessage());
+            return;
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Source file is not valid");
+            System.out.println(ex.getMessage());
+            return;
         }
+
+        System.out.println("Done");
     }
 
     /**
