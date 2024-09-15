@@ -43,6 +43,9 @@ public class Converter {
             System.out.println("Source file is not valid");
             System.out.println(ex.getMessage());
             return;
+        } catch (Exception ex) {
+            System.out.println("Unknown error");
+            System.out.println(ex.getMessage());
         }
 
         System.out.println("Done");
